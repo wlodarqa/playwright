@@ -7,7 +7,7 @@ Create tests to soucedemo page in playwright.
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/wlodarqa/playwright.git
 ```
 
 Go to the project directory
