@@ -13,12 +13,14 @@ test.describe('Add to shopping card tests', () => {
     const loginPage = new LoginPage(page);
     productsPage = new ProductsPage(page);
     shoppingCard = new ShoppingCard(page);
-
     await page.goto('/');
     await loginPage.login(login, password);
   });
+  const thanksOrderTitle = 'Thank you for your order!';
+  const thanksOrderText =
+    'Your order has been dispatched, and will arrive just as fast as the pony can get there!';
 
-  test('Add items to shopping card', async ({ page }) => {
+  test('Add items to shopping card and buy it', async ({ page }) => {
     await expect(productsPage.inventoryContainer).toBeVisible();
     await productsPage.backpackAdd.click();
     await expect(productsPage.shoppingCardValue).toHaveText('1');
@@ -26,5 +28,16 @@ test.describe('Add to shopping card tests', () => {
     await expect(productsPage.shoppingCardValue).toHaveText('2');
     await productsPage.shoppingCard.click();
     await expect(shoppingCard.cardList).toBeVisible();
+    await shoppingCard.checkoutButton.click();
+    await shoppingCard.firstName.fill('Tester');
+    await shoppingCard.lastName.fill('Playwright');
+    await shoppingCard.postalCode.fill('12345');
+    await shoppingCard.continueButton.click();
+    await expect(shoppingCard.summaryInfo).toBeVisible();
+    await shoppingCard.finishButton.click();
+    await expect(shoppingCard.thanksOrderTitle).toHaveText(thanksOrderTitle);
+    await expect(shoppingCard.thanksOrderText).toHaveText(thanksOrderText);
+    await shoppingCard.backToProducts.click();
+    await expect(productsPage.inventoryList).toBeVisible();
   });
 });
