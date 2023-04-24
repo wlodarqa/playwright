@@ -2,10 +2,10 @@ import { Page } from '@playwright/test';
 
 export class LoginPage {
   constructor(private page: Page) {}
-  loginInput = this.page.locator('#user-name');
-  passwordInput = this.page.locator('#password');
-  loginButton = this.page.locator('#login-button');
-  inventoryList = this.page.locator('.inventory_list');
+  loginInput = this.page.getByTestId('username');
+  passwordInput = this.page.getByTestId('password');
+  loginButton = this.page.getByTestId('login-button');
+  errorMsg = this.page.getByTestId('error');
 
   async login(login: string, password: string): Promise<void> {
     await this.loginInput.fill(login);
