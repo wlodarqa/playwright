@@ -4,7 +4,7 @@ import { loginData } from '../test-data/login.data';
 import { ProductsPage } from '../pages/products.page';
 import { ShoppingCard } from '../pages/shoppingCard.page';
 
-test.describe('Add to shopping card tests', () => {
+test.describe('Add to shopping card and realize order', () => {
   let productsPage: ProductsPage;
   let shoppingCard: ShoppingCard;
   test.beforeEach(async ({ page }) => {
